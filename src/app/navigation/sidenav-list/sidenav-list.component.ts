@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 
@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/auth/auth.service';
   templateUrl: './sidenav-list.component.html',
   styleUrls: ['./sidenav-list.component.scss']
 })
-export class SidenavListComponent implements OnInit {
+export class SidenavListComponent implements OnInit, OnDestroy {
   @Output() closeSidenav = new EventEmitter;
   isAuth: boolean = false;
   authSubcription: Subscription;
@@ -20,7 +20,18 @@ export class SidenavListComponent implements OnInit {
     })
   }
 
+  onLogout(){
+    this.authService.logout();
+    this.onClose();
+    
+  }
+
   onClose(){
     this.closeSidenav.emit();
   }
-}
+
+  ngOnDestroy(): void {
+    this.authSubcription.unsubscribe();
+  }
+
+}  

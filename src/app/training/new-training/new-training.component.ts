@@ -15,7 +15,6 @@ import { UIService } from 'src/app/shared/ui.service';
 export class NewTrainingComponent implements OnInit, OnDestroy {
   // exercises: Exercise[] = [];
   exercises: Exercise[];
-  exerciseSubcription: Subscription;
   isLoading = false;
   private subs: Subscription[] = [];
   constructor(
@@ -33,11 +32,15 @@ export class NewTrainingComponent implements OnInit, OnDestroy {
     this.subs.push(this.trainingService.exercisesChanged.subscribe(res => {
       this.exercises = res;
     }));
+    this.fetchExercises();
+  }
+  
+  fetchExercises(){
     this.trainingService.fetchAvailableExercises();
   }
+
   ngOnDestroy(): void {
     this.subs.forEach(sub => sub.unsubscribe());
-    this.exerciseSubcription.unsubscribe();
   }
   onStartTraining(form: NgForm) {
     this.trainingService.startExercise(form.value.exercise);

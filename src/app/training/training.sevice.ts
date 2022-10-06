@@ -44,7 +44,8 @@ export class TrainingService{
             this.exercisesChanged.next([...this.availableExercises]);
         }, err => {
             this.uiService.loadingStateChanged.next(false);
-            console.log(err)
+            this.uiService.showSnackbar('Fetch data fail', null, 3000);
+            this.exercisesChanged.next(null);
         }))
     }
 

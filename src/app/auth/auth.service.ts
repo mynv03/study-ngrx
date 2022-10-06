@@ -21,7 +21,6 @@ export class AuthService{
         private router: Router,
         private afAuth: AngularFireAuth,
         private trainingService: TrainingService,
-        private snackbar: MatSnackBar,
         private uIService: UIService
     ){
 
@@ -57,9 +56,7 @@ export class AuthService{
         })
         .catch(err => {
             this.uIService.loadingStateChanged.next(false);
-            this.snackbar.open(err.message, null, {
-                duration: 3000
-            })
+            this.uIService.showSnackbar(err.message, null, 3000);
         })
     }
 
@@ -77,9 +74,7 @@ export class AuthService{
             })
             .catch(err => {
                 this.uIService.loadingStateChanged.next(false);
-                this.snackbar.open(err.message, null, {
-                    duration: 3000
-                })
+                this.uIService.showSnackbar(err.message, null, 3000);
             })
     }
 

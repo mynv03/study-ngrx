@@ -34,7 +34,9 @@ export class PastTrainingsComponent implements OnInit, AfterViewInit, OnDestroy 
     this.dataSource.paginator = this.paginator;
   }
   ngOnDestroy(): void {
-    this.exChangedSubcription.unsubscribe();
+    if(this.exChangedSubcription){
+      this.exChangedSubcription.unsubscribe();
+    }
   }
   doFilter(filterValue: string){
     this.dataSource.filter = filterValue.trim().toLowerCase();

@@ -12,9 +12,9 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AuthModule } from './auth/auth.module';
 import { TrainingModule } from './training/training.module';
+import { AuthRoutingModule } from './auth/auth-routing.module';
 
 @NgModule({
   declarations: [
@@ -32,9 +32,7 @@ import { TrainingModule } from './training/training.module';
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    AuthModule,
-    TrainingModule
+    AuthRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent],
